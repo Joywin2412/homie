@@ -60,7 +60,6 @@ export const HomePage = () => {
         <ServiceProducer/>
        <Footer/>
 
-        </div>
         <img src={img2} alt="interior design image" />
       </section>
       <section className="section4">
