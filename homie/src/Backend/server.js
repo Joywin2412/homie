@@ -13,7 +13,7 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use("/api/user", userRouters);
+app.use("/api/users", userRouters);
 // app.use(notFound);
 // app.use(errorHandler);
 
