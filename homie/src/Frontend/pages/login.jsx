@@ -61,7 +61,7 @@ function Login() {
               </div>
             </form>
             <div className="loginhere">
-              Don't have an account? <a className="a" href="signup.html" className="loginhere-link">Create an account here</a>
+              Don't have an account? <a className="a login-here link" href="signup.html" >Create an account here</a>
             </div>
           </div>
         </div>
