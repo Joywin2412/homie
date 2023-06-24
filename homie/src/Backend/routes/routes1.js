@@ -1,18 +1,22 @@
 const express = require("express");
-const router = express.Router();
+const jwt = require("jsonwebtoken");
 const { registerUser, authUser } = require("../controllers/userControllers");
-// function AuthenticateUser(req, res, next) {
-//   try {
-//     const { email } = req.body;
-//     const token = req.headers.authorization.split(" ")[1];
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET, { id: email });
-//     next();
-//   } catch (err) {
-//     console.log(req.url);
-//     console.log(err);
-//     return res.status(401).send({ message: "Invalid token" });
-//   }
-// }
+// const jwt = require();
+const router = express.Router();
+
+function AuthenticateUser(req, res, next) {
+  console.log(req.url);
+  try {
+    const { email } = req.body;
+    const token = req.headers.authorization.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET, { id: email });
+    next();
+  } catch (err) {
+    console.log(req.url);
+    console.log(err);
+    return res.status(401).send({ message: "Invalid token" });
+  }
+}
 router.route("/").post(registerUser);
 router.post("/login", authUser);
 
