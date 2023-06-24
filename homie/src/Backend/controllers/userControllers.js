@@ -3,7 +3,7 @@
 const AsyncHandler = require("express-async-handler");
 const user = require("../models/usermodel1.js");
 const generateToken = require("../config/generateToken.js");
-
+const serviceTicket = require("../models/serviceTicketSchema.js");
 const registerUser = AsyncHandler(async (req, res) => {
   const { name, email, password, phone, lat, lon, address } = req.body;
   // console.log(lat, lon);
@@ -69,9 +69,52 @@ const authUser = AsyncHandler(async (req, res) => {
   }
 });
 
+const profileUser = AsyncHandler(async (req, res) => {
+  const id = req.params.id;
+  // console.log(name);
+  const user2 = await user.findOne({ Email: id });
+
+  if (user2) {
+    res.json({
+      _id: user2._id,
+      name: user2.Name,
+      email: user2.Email,
+      phone: user2.Phone,
+      token: generateToken(user2._id),
+    });
+  } else {
+    res.status(401);
+    throw new Error("Invalid email and password");
+  }
+});
+const getServiceTickets = AsyncHandler(async(req,res)=>{
+  const {email} = req.body;
+  try{
+    const serviceTicketData = await serviceTicket.find();
+    res.status(200).json(serviceTicketData);
+  }
+  catch(err){
+    console.log(err);
+    throw new Error("No service tickets available");
+  }
+});
+const addServiceTickets = AsyncHandler(async(req,res)=>{
+  const {email,problem} = req.body;
+  try{
+    await serviceTicket.create({Email : email , Problem : problem,Status : "Pending"});
+    res.status(200).json("Successfully created");
+  }
+  catch(err){
+    console.log(err);
+    throw new Error("Error in creating service tickets");
+  }
+});
 module.exports = {
   registerUser,
   authUser,
+  profileUser,
+  getServiceTickets,
+  addServiceTickets,
 };
 
 // Request must be in lower case while the schema is in upper case
