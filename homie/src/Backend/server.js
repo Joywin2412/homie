@@ -1,19 +1,21 @@
 const express = require("express");
-const app = express();
-const { notAvailable, errorHandler } = require("./middleware/errorMiddleware");
 const dotenv = require("dotenv");
-const cors = require("cors");
-const userRoutes = require("./routes/routes1");
-
+const connectDB = require("./config/db");
+const colors = require("colors");
+const userRouters = require("./routes/routes1");
+const { notFound, errorHandler } = require("./middleware/errorMiddleWare");
 dotenv.config();
+connectDB();
+
+const app = express();
+var cors = require("cors");
 app.use(cors());
+
 app.use(express.json());
 
-app.use("/api/user", userRoutes);
-app.use(notAvailable);
-app.use(errorHandler);
+app.use("/api/user", userRouters);
+// app.use(notFound);
+// app.use(errorHandler);
 
-const port = process.env.port || 5000;
-app.listen(port, () => {
-  console.log(`The server is running on ${port}`);
-});
+const port = process.env.PORT || 5000;
+app.listen(5000, console.log(`Port is running on ${port}`.yellow.bold));
