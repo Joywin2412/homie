@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
-const designerModel = mongoose.Schema(
+const serviceModel = mongoose.Schema(
   {
-    Name: { type: String },
     Email: { type: String, unique: true, required: true },
     problem:{type: String},
-    rating:{type:Number}
+    status:{type: String}
   },
   { timestamps: true }
 );
-module.exports = mongoose.model("designer", designerModel);
+module.exports = mongoose.model("service", serviceModel);
