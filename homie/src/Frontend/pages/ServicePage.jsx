@@ -2,10 +2,12 @@ import  React, {useState,useEffect} from "react";
 import { Navbar } from "../components/Navbar";
 import { ServiceTicket } from "../components/ServiceTicket";
 import axios from "axios";
+import { Feedback } from "../components/Feedback";
 export const ServicePage = () => {
   const [loading, setLoading] = useState(1);
   const [serviceTicketData, setServiceTicketData] = useState([]);
   const [problem,setProblem] = useState("")
+  const [feedbackData,setFeedbackData] = useState([]);
   const serviceTicketUtil = async () => {
     // Gets the service tickets of the user
     let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
@@ -53,6 +55,7 @@ export const ServicePage = () => {
       <div>
         <Navbar />
         <ServiceTicket serviceTicketData = {serviceTicketData} />
+        <Feedback feedbackData = {feedbackData}/>
         <form>
           <label> What is your problem? </label>
           <input type = "text" onChange = {(e) =>setProblem(e.target.value)} />
