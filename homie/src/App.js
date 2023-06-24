@@ -9,7 +9,7 @@ import Login from './Frontend/pages/login';
 function App() {
   return (
     <div className="App">
-     <HomePage />
+     <ServicePage />
     </div>
   );
 }

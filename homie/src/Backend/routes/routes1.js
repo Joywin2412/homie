@@ -7,7 +7,8 @@ const {
   getServiceTickets,
   addServiceTickets,
   getFeedback,
-  addFeedback
+  addFeedback,
+  getServiceProducer,
 } = require("../controllers/userControllers");
 // const jwt = require();
 const router = express.Router();
@@ -33,5 +34,6 @@ router.get("/getServiceTickets",AuthenticateUser,getServiceTickets);
 router.post("/addServiceTickets",AuthenticateUser,addServiceTickets);
 router.get("/getFeedback",AuthenticateUser,getFeedback);
 router.post("/addFeedback",AuthenticateUser,addFeedback);
+router.get("/getServiceProducer",AuthenticateUser,getServiceProducer);
 
 module.exports = router;
