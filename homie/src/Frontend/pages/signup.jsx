@@ -38,7 +38,7 @@ const Signup = () => {
   };
 
   return (
-    <div className='body'>
+    <div className='bodySignup'>
     <div className="main">
         
       <section className="signup">

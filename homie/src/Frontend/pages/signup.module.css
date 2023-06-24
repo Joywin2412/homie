@@ -46,7 +46,7 @@
     -o-appearance: radio !important;
     -ms-appearance: radio !important; }
   
-  h2 {
+  .form-title {
     line-height: 1.66;
     margin: 0;
     padding: 0;
@@ -61,7 +61,7 @@
   .clear {
     clear: both; }
   
-  .body {
+  .bodySignup {
     font-size: 14px;
     line-height: 1.8;
     color: #222;
