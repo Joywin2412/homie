@@ -3,6 +3,7 @@ import { Navbar } from '../components/Navbar';
 import "../pages/Homepage.module.css";
 import img1 from "../../assets/sec3.jpg";
 import img2 from "../../assets/sec4.jpg";
+import { Footer } from '../components/Footer';
 
 export const HomePage = ()=>{
     return(
@@ -37,7 +38,7 @@ export const HomePage = ()=>{
             idhar reviews aayenge...mat pucho kaise
             bas aayenge reviews yaha pe
         </section>
-       
+       <Footer/>
         </div>
     )
 }
