@@ -1,0 +1,8 @@
+.footerBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    background-color: rgb(46, 46, 46);
+    color: azure;
+}
