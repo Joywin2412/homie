@@ -1,6 +1,10 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const { registerUser, authUser } = require("../controllers/userControllers");
+const {
+  registerUser,
+  authUser,
+  profileUser,
+} = require("../controllers/userControllers");
 // const jwt = require();
 const router = express.Router();
 
@@ -19,5 +23,6 @@ function AuthenticateUser(req, res, next) {
 }
 router.route("/").post(registerUser);
 router.post("/login", authUser);
+router.get("/profile/:id", AuthenticateUser, profileUser);
 
 module.exports = router;
