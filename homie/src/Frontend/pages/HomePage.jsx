@@ -2,6 +2,8 @@ import React from 'react';
 import { Navbar } from '../components/Navbar';
 import "../pages/Homepage.module.css";
 import img1 from "../../assets/sec3.jpg";
+import img2 from "../../assets/sec4.jpg";
+
 export const HomePage = ()=>{
     return(
         <div>
@@ -28,7 +30,12 @@ export const HomePage = ()=>{
             We believe that finding the perfect interior designer should be an enjoyable and seamless experience. Whether you're seeking a complete home renovation, a room makeover, or expert guidance on color schemes and furniture selection, our interior designers are here to guide you every step of the way. They understand the importance of functionality, aesthetics, and creating spaces that truly inspire and enhance your daily life.Discover the perfect interior designer who resonates with your style and transforms your space into a reflection of your individuality. Let homie be your go-to resource for finding the right talent to shape your dream interior design project.
             </p>
             </div>
-            <img src={img1} alt='interior design image'/>
+            <img src={img2} alt='interior design image'/>
+        </section>
+        <section className='section4'>
+            <h1>Reviews</h1>
+            idhar reviews aayenge...mat pucho kaise
+            bas aayenge reviews yaha pe
         </section>
        
         </div>
