@@ -2,6 +2,7 @@
 
 const AsyncHandler = require("express-async-handler");
 const user = require("../models/usermodel1.js");
+const serviceProviderModel = require("../models/serviceProducerSchema.js");
 const generateToken = require("../config/generateToken.js");
 const serviceTicket = require("../models/serviceTicketSchema.js");
 const feedbackProvider = require("../models/feedbackSchema.js");
@@ -88,6 +89,16 @@ const profileUser = AsyncHandler(async (req, res) => {
     throw new Error("Invalid email and password");
   }
 });
+
+const serviceProviders= AsyncHandler(async(req,res)=>{
+  try {
+    const serviceProvider = await serviceProviderModel.find({});
+    res.json(serviceProvider);
+  } catch (error) {
+    throw new Error("Error in finding in service provider");
+  }
+});
+
 const getServiceTickets = AsyncHandler(async(req,res)=>{
   const {email} = req.body;
   try{
@@ -110,6 +121,7 @@ const addServiceTickets = AsyncHandler(async(req,res)=>{
     throw new Error("Error in creating service tickets");
   }
 });
+
 const getFeedback = AsyncHandler(async(req,res)=>{
   const {email} = req.body;
   try{
@@ -132,6 +144,7 @@ const addFeedback = AsyncHandler(async(req,res)=>{
     throw new Error("Error in creating feedback");
   }
 });
+
 module.exports = {
   registerUser,
   authUser,
@@ -139,7 +152,8 @@ module.exports = {
   getServiceTickets,
   addServiceTickets,
   getFeedback,
-  addFeedback
+  addFeedback,
+  serviceProviders,
 };
 
 // Request must be in lower case while the schema is in upper case
