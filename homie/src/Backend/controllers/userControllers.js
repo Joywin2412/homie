@@ -6,6 +6,7 @@ const serviceProviderModel = require("../models/serviceProducerSchema.js");
 const generateToken = require("../config/generateToken.js");
 const serviceTicket = require("../models/serviceTicketSchema.js");
 const feedbackProvider = require("../models/feedbackSchema.js");
+const serviceProducer = require("../models/serviceProducerSchema.js");
 const registerUser = AsyncHandler(async (req, res) => {
   const { name, email, password, phone, lat, lon, address } = req.body;
   // console.log(lat, lon);
@@ -144,6 +145,16 @@ const addFeedback = AsyncHandler(async(req,res)=>{
     throw new Error("Error in creating feedback");
   }
 });
+const getServiceProducer = AsyncHandler(async(req,res)=>{
+  try{
+    const serviceProducerData = await serviceProducer.find();
+    res.status(200).json(serviceProducerData);
+  }
+  catch(err){
+    console.log(err);
+    throw new Error("No service producers available");
+  }
+});
 
 module.exports = {
   registerUser,
@@ -154,6 +165,7 @@ module.exports = {
   getFeedback,
   addFeedback,
   serviceProviders,
+  getServiceProducer
 };
 
 // Request must be in lower case while the schema is in upper case

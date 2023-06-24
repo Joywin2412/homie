@@ -3,15 +3,17 @@ import { Navbar } from "../components/Navbar";
 import { ServiceTicket } from "../components/ServiceTicket";
 import axios from "axios";
 import { Feedback } from "../components/Feedback";
+import { ServiceProducer } from "../components/ServiceProducer";
 export const ServicePage = () => {
   const [loading, setLoading] = useState(1);
   const [serviceTicketData, setServiceTicketData] = useState([]);
+  const [serviceProducerData,setServiceProducerData] = useState([]);
   const [problem,setProblem] = useState("")
   const [feedbackData,setFeedbackData] = useState([]);
   const serviceTicketUtil = async () => {
     // Gets the service tickets of the user
     let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
-    let link = ["/api/users/getServiceTickets"];
+    let link = ["/api/users/getServiceTickets","/api/users/getServiceProducer"];
     let requestOptions = {
       headers: {
         "Content-Type": "application/json",
@@ -21,6 +23,8 @@ export const ServicePage = () => {
     try {
       const serviceTicketDataNow = await axios.get(backendLink + link[cnt++],requestOptions);
       setServiceTicketData(serviceTicketDataNow.data);
+      const serviceProducerData = await axios.get(backendLink + link[cnt++],requestOptions);
+      setServiceProducerData(serviceProducerData.data);
       setLoading(0);
     } catch(err) {
       setLoading(0);
@@ -28,6 +32,7 @@ export const ServicePage = () => {
   };
   const serviceTicketHandler = async(e) =>{
     // Creates a service ticket in the database
+    setLoading(1);
     e.preventDefault();
     let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
     let link = ["/api/users/addServiceTickets","/api/users/getServiceTickets"];
@@ -56,6 +61,7 @@ export const ServicePage = () => {
         <Navbar />
         <ServiceTicket serviceTicketData = {serviceTicketData} />
         <Feedback feedbackData = {feedbackData}/>
+        <ServiceProducer serviceProducerData={serviceProducerData} />
         <form>
           <label> What is your problem? </label>
           <input type = "text" onChange = {(e) =>setProblem(e.target.value)} />
