@@ -5,7 +5,7 @@ const userModel = mongoose.Schema(
     name: { type: String },
     email: { type: String, unique: true },
     password: { type: String },
-    phone: { type: String },
+    phone: { type: String, unique: true },
   },
   { timestamps: true }
 );
