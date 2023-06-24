@@ -4,6 +4,7 @@ import { ServiceTicket } from "../components/ServiceTicket";
 import axios from "axios";
 import { Feedback } from "../components/Feedback";
 import { ServiceProducer } from "../components/ServiceProducer";
+import { ServiceProducerPage } from "./ServiceProducerPage";
 export const ServicePage = () => {
   const [loading, setLoading] = useState(1);
   const [serviceTicketData, setServiceTicketData] = useState([]);
@@ -60,7 +61,6 @@ export const ServicePage = () => {
       <div>
         <Navbar />
         <ServiceTicket serviceTicketData = {serviceTicketData} />
-        <Feedback feedbackData = {feedbackData}/>
         <ServiceProducer serviceProducerData={serviceProducerData} />
         <form>
           <label> What is your problem? </label>
