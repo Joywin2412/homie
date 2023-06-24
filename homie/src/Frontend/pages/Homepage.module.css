@@ -1,19 +1,20 @@
 .section1{
-    height: 100vh;
+    height: 40rem;
     background: url('../../assets/sec2.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-size: 3rem;
-    background-color: linear gradient(rgb(235,17,50),rgb(235, 17, 17),rgb(235, 71, 17),rgb(235, 82, 17),rgb(255, 206, 9));
     text-align: center;
     font-family: 'Montserrat',sans-serif;
+    color: rgb(48, 48, 45);
 }
 .section2,.section3{
     background-color: rgb(214, 214, 214);
-    height: 60vh;
+    height: 35rem;
     display: flex;
     padding: 2rem;
+    width: 100vw;
 }
 .section3{
     background-color: white;
@@ -25,6 +26,6 @@
     object-fit: cover;
 }
 .section4{
-    height: 60vh;
+    height: 35rem;
     text-align: center;
 }
