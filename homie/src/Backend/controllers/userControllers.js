@@ -5,6 +5,7 @@ const user = require("../models/usermodel1.js");
 const serviceProviderModel = require("../models/serviceProducerSchema.js");
 const generateToken = require("../config/generateToken.js");
 const serviceTicket = require("../models/serviceTicketSchema.js");
+const feedbackProvider = require("../models/feedbackSchema.js");
 const registerUser = AsyncHandler(async (req, res) => {
   const { name, email, password, phone, lat, lon, address } = req.body;
   // console.log(lat, lon);
@@ -94,11 +95,9 @@ const serviceProviders= AsyncHandler(async(req,res)=>{
     const serviceProvider = await serviceProviderModel.find({});
     res.json(serviceProvider);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server Error' });
+    throw new Error("Error in finding in service provider");
   }
 });
-
 
 const getServiceTickets = AsyncHandler(async(req,res)=>{
   const {email} = req.body;
@@ -123,12 +122,37 @@ const addServiceTickets = AsyncHandler(async(req,res)=>{
   }
 });
 
+const getFeedback = AsyncHandler(async(req,res)=>{
+  const {email} = req.body;
+  try{
+    const feedbackData = await feedbackProvider.find();
+    res.status(200).json(feedbackData);
+  }
+  catch(err){
+    console.log(err);
+    throw new Error("No service tickets available");
+  }
+});
+const addFeedback = AsyncHandler(async(req,res)=>{
+  const {name,feedback} = req.body;
+  try{
+    await feedbackProvider.create({Name : name ,Likes : 0 , Comment : feedback,reportFlag : 0 });
+    res.status(200).json("Successfully created");
+  }
+  catch(err){
+    console.log(err);
+    throw new Error("Error in creating feedback");
+  }
+});
+
 module.exports = {
   registerUser,
   authUser,
- 
+  profileUser,
   getServiceTickets,
   addServiceTickets,
+  getFeedback,
+  addFeedback,
   serviceProviders,
 };
 

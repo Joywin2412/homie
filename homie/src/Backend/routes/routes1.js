@@ -5,7 +5,9 @@ const {
   authUser,
   profileUser,
   getServiceTickets,
-  addServiceTickets
+  addServiceTickets,
+  getFeedback,
+  addFeedback
 } = require("../controllers/userControllers");
 // const jwt = require();
 const router = express.Router();
@@ -29,5 +31,7 @@ router.post("/login", authUser);
 router.get("/profile/:id", AuthenticateUser, profileUser);
 router.get("/getServiceTickets",AuthenticateUser,getServiceTickets);
 router.post("/addServiceTickets",AuthenticateUser,addServiceTickets);
+router.get("/getFeedback",AuthenticateUser,getFeedback);
+router.post("/addFeedback",AuthenticateUser,addFeedback);
 
 module.exports = router;
