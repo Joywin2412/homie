@@ -69,9 +69,28 @@ const authUser = AsyncHandler(async (req, res) => {
   }
 });
 
+const profileUser = AsyncHandler(async (req, res) => {
+  const id = req.params.id;
+  // console.log(name);
+  const user2 = await user.findOne({ Email: id });
+
+  if (user2) {
+    res.json({
+      _id: user2._id,
+      name: user2.Name,
+      email: user2.Email,
+      phone: user2.Phone,
+      token: generateToken(user2._id),
+    });
+  } else {
+    res.status(401);
+    throw new Error("Invalid email and password");
+  }
+});
 module.exports = {
   registerUser,
   authUser,
+  profileUser,
 };
 
 // Request must be in lower case while the schema is in upper case
