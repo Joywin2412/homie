@@ -30,7 +30,7 @@ const data = [
         avgCost: 100000
     }
 ]
-export const ServiceTickets = () => {
+export const ServiceProducer = () => {
     const [isDesigner, setIsDesigner] = useState([]);
     const serviceHandler = (e) => {
         console.log(isDesigner);

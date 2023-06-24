@@ -4,7 +4,7 @@ import "../pages/Homepage.module.css";
 import img1 from "../../assets/sec3.jpg";
 import img2 from "../../assets/sec4.jpg";
 import { Footer } from '../components/Footer';
-import { ServiceTickets } from '../components/ServiceTickets';
+import { ServiceTickets } from '../components/ServiceProducer';
 
 export const HomePage = ()=>{
     return(
@@ -39,7 +39,7 @@ export const HomePage = ()=>{
             idhar reviews aayenge...mat pucho kaise
             bas aayenge reviews yaha pe
         </section>
-        <ServiceTickets/>
+        <ServiceProducer/>
        <Footer/>
         </div>
     )
