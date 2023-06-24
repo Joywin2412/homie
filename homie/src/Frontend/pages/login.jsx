@@ -3,7 +3,7 @@ import "./signup.module.css";
 
 
 function Login() {
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Get form values
@@ -15,15 +15,37 @@ function Login() {
       alert('Please enter both email and password.');
       return;
     }
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
 
-    // Make API request or perform other authentication logic
-    // Replace the code below with your own implementation
-    // Example: Making a mock API request using Fetch API
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND}/user/login`,
+        { email, password },
+        config
+      );
+      
+      
+      console.log("Login Successful");
+      localStorage.setItem("user", JSON.stringify(data));
+  
+    } catch (error) {
+      console.log(error);
+    }
+    
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      accesstoken = foundUser.token;
     fetch('https://api.example.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      Authorization: `Bearer ${accesstoken}`,
       body: JSON.stringify({ email, password }),
     })
       .then((response) => {
@@ -39,6 +61,7 @@ function Login() {
         // Handle any network or server errors
         console.error('Error occurred:', error);
       });
+    }
   };
 
   return (

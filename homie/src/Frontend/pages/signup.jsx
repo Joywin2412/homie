@@ -5,7 +5,7 @@ import "./signup.module.css";
 import image from "../../assets/spacejoy-9M66C_w_ToM-unsplash.jpg";
 
 const Signup = () => {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const name = document.getElementById("name").value;
@@ -21,6 +21,26 @@ const Signup = () => {
     if (password !== rePassword) {
       alert("Passwords do not match");
       return;
+    }
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND}/user`,
+        { name, email, password},
+        config
+      );
+      console.log("Registration successful");
+      localStorage.setItem("user", JSON.stringify(data));
+      
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      
     }
 
     alert("Sign up successful!");
