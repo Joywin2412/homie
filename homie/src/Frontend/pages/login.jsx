@@ -44,7 +44,7 @@ function Login() {
   };
 
   return (
-    <div className='body'>
+    <div className='bodySignup'>
     <div className="main">
     
       <section className="signup">
@@ -63,7 +63,7 @@ function Login() {
               </div>
             </form>
             <div className="loginhere">
-              Don't have an account? <button onClick={()=>(navigate("/signup"))} className="a login-here link"   >Create an account here</button>
+              Don't have an account? <button onClick={()=>(navigate("/signup"))} className="loginhere-link">Create an account here</button>
             </div>
           </div>
         </div>

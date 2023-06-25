@@ -65,11 +65,16 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
   if (loading) return <h1> Loading </h1>;
   else {
     return (
-      <div>
-        <Navbar name = {name}/>
+      <div className="container-serviceproducer">
+        <Navbar name={name} />
         <ServiceProducer serviceProducerData={serviceProducerData} />
-        <Feedback feedbackData = {feedbackData} feedbackHander = {feedbackHandler} setFeedback={setFeedback}/>
+        <Feedback
+          feedbackData={feedbackData}
+          feedbackHandler={feedbackHandler}
+          setFeedback={setFeedback}
+        />
       </div>
     );
+    
   }
 };

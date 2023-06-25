@@ -5,6 +5,7 @@ import axios from "axios";
 import { Feedback } from "../components/Feedback";
 import { ServiceProducer } from "../components/ServiceProducer";
 import { ServiceProducerPage } from "./ServiceProducerPage";
+import "./servicepage.module.css";
 export const ServicePage = () => {
   const [loading, setLoading] = useState(1);
   const [serviceTicketData, setServiceTicketData] = useState([]);
@@ -71,16 +72,20 @@ export const ServicePage = () => {
   if (loading) return <h1> Loading </h1>;
   else {
     return (
-      <div>
-        <Navbar name = {name}/>
+      
+        <body className="bodymain">
+      <div className="bodyServicePage">
+        <Navbar className="nameServicePage" name = {name}/>
         <ServiceTicket serviceTicketData = {serviceTicketData} />
         <ServiceProducer serviceProducerData={serviceProducerData} />
-        <form>
-          <label> What is your problem? </label>
-          <input type = "text" onChange = {(e) =>setProblem(e.target.value)} />
-          <input type = "submit" onClick = {serviceTicketHandler} />
+        <form className="formServicePage">
+          <label className="labelServicePage"><h1>What is your problem?</h1> </label>
+          <input type = "text" className="textboxServicePage" onChange = {(e) =>setProblem(e.target.value)} />
+          <input type = "submit"className="submitServicePage" onClick = {serviceTicketHandler} />
         </form>
       </div>
+      </body>
+      
     );
   }
 };

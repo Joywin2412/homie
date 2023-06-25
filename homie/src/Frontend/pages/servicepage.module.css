@@ -1,0 +1,52 @@
+.bodymain {
+    background-image: url('../../assets/spacejoy-9M66C_w_ToM-unsplash.jpg');
+    background-size:cover;
+    
+        background-repeat: no-repeat;
+        min-height: 100vh;
+      }
+      
+
+  
+  .nameServicePage {
+    background-color: peachpuff;
+    color: white;
+    padding: 10px;
+  }
+  
+  .formServicePage {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+  
+  .labelServicePage {
+    margin-bottom: 5px;
+    color: antiquewhite;
+  }
+  
+  .textboxServicePage,
+  .submitServicePage{
+    margin-bottom: 10px;
+  }
+  
+  .submitServicePage {
+    background-color: rgb(235, 17, 50);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Additional styling for better visibility */
+  
+  .textboxServicePage {
+    width: 300px;
+  }
+  
+  .submitServicePage:hover {
+    background-color: coral;
+  }
+  
+  
