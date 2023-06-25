@@ -3,6 +3,7 @@ import { Navbar } from "../components/Navbar";
 import { ServiceTicket } from "../components/ServiceTicket";
 import axios from "axios";
 import {Profile} from "../components/Profile";
+import Loading from "../components/loading";
 export const ProfilePage = () => {
   const [loading, setLoading] = useState(1);
   const [serviceTicketData, setServiceTicketData] = useState([]);
@@ -25,7 +26,7 @@ export const ProfilePage = () => {
       accessToken = foundUser.token;
       email = foundUser.email;
     }
-    let link = ["/api/users/getServiceTickets",`/api/users/profile/${email}`];
+    let link = [`/api/users/getServiceTickets/${email}`,`/api/users/profile/${email}`];
     let requestOptions = {
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +47,7 @@ export const ProfilePage = () => {
   useEffect(()=>{
     profileUtil();
   },[]);
-  if (loading) return <h1> Loading </h1>;
+  if (loading) return <Loading/>;
   else {
     return (
       <div>
