@@ -26,7 +26,7 @@ export const ProfilePage = () => {
       accessToken = foundUser.token;
       email = foundUser.email;
     }
-    let link = ["/api/users/getServiceTickets",`/api/users/profile/${email}`];
+    let link = [`/api/users/getServiceTickets/${email}`,`/api/users/profile/${email}`];
     let requestOptions = {
       headers: {
         "Content-Type": "application/json",

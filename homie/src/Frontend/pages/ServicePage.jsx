@@ -11,12 +11,13 @@ export const ServicePage = () => {
   const [serviceTicketData, setServiceTicketData] = useState([]);
   const [serviceProducerData,setServiceProducerData] = useState([]);
   
-  let name;
+  let name,email;
   const loggendinUser = localStorage.getItem("user");
   if(loggendinUser)
   {
     const foundUser = JSON.parse(loggendinUser);
     name = foundUser.name;
+    email = foundUser.email;
   }
   const serviceTicketUtil = async () => {
     // Gets the service tickets of the user
@@ -27,7 +28,7 @@ export const ServicePage = () => {
       const foundUser = JSON.parse(loggendinUser);
       accessToken = foundUser.token;
     }
-    let link = ["/api/users/getServiceTickets","/api/users/getServiceProducer"];
+    let link = [`/api/users/getServiceTickets/${email}`,"/api/users/getServiceProducer"];
     let requestOptions = {
       headers: {
         "Content-Type": "application/json",

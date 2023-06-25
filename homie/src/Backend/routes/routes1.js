@@ -5,6 +5,7 @@ const {
   authUser,
   profileUser,
   getServiceTickets,
+  getServiceTicketsByProducer,
   addServiceTickets,
   getFeedback,
   addFeedback,
@@ -30,7 +31,8 @@ function AuthenticateUser(req, res, next) {
 router.route("/").post(registerUser);
 router.post("/login", authUser);
 router.get("/profile/:id", AuthenticateUser, profileUser);
-router.get("/getServiceTickets",AuthenticateUser,getServiceTickets);
+router.get("/getServiceTickets/:id",AuthenticateUser,getServiceTickets);
+router.get("/getProdServiceTickets/:id/:prod",AuthenticateUser,getServiceTicketsByProducer);
 router.post("/addServiceTickets",AuthenticateUser,addServiceTickets);
 router.get("/getFeedback/:id",AuthenticateUser,getFeedback);
 router.post("/addFeedback",AuthenticateUser,addFeedback);
