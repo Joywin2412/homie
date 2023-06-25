@@ -120,6 +120,16 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
   if (loading) return <Loading/>;
   else {
     return (
+
+      <div className="container-serviceproducer">
+        <Navbar name={name} />
+        <ServiceProducer serviceProducerData={serviceProducerData} />
+        <Feedback
+          feedbackData={feedbackData}
+          feedbackHandler={feedbackHandler}
+          setFeedback={setFeedback}
+        />
+
       <div>
         <Navbar name = {name}/>
         <ServiceTicket serviceTicketData = {serviceTicketData} />
@@ -129,7 +139,9 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
           <input type = "submit" onClick = {serviceTicketHandler} />
         </form>
         <Feedback feedbackData = {feedbackData} feedbackHandler = {feedbackHandler} setFeedback={setFeedback}/>
+
       </div>
     );
+    
   }
 };
