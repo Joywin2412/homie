@@ -3,11 +3,13 @@
 import React from 'react';
 import "./signup.module.css";
 import image from "../../assets/spacejoy-9M66C_w_ToM-unsplash.jpg";
-
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -30,13 +32,12 @@ const Signup = () => {
       };
 
       const { data } = await axios.post(
-        `${process.env.REACT_APP_BACKEND}/user`,
+        `${process.env.REACT_APP_BACKEND}/api/users/`,
         { name, email, password},
         config
       );
       console.log("Registration successful");
       localStorage.setItem("user", JSON.stringify(data));
-      
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -90,7 +91,7 @@ const Signup = () => {
               </div>
             </form>
             <div className="loginhere">
-              Have already an account? <a href="login.jsx" className="loginhere-link">Login here</a>
+              Have already an account? <button className="loginhere-link" onClick={()=>navigate("/login")}>Login here</button>
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ const serviceTicket = require("../models/serviceTicketSchema.js");
 const feedbackProvider = require("../models/feedbackSchema.js");
 const serviceProducer = require("../models/serviceProducerSchema.js");
 const registerUser = AsyncHandler(async (req, res) => {
-  const { name, email, password, phone, lat, lon, address } = req.body;
+  const { name, email, password, phone} = req.body;
   // console.log(lat, lon);
   if (!name || !email || !password) {
     res.status(400);
@@ -51,9 +51,7 @@ const authUser = AsyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   const user2 = await user.findOne({ Email: email });
-  // console.log(email, password);
   if (user2) {
-    // console.log(user2.Password);
     if (await user2.matchPassword(password)) {
       res.json({
         _id: user2._id,

@@ -11,9 +11,22 @@ export const ServicePage = () => {
   const [serviceProducerData,setServiceProducerData] = useState([]);
   const [problem,setProblem] = useState("")
   const [feedbackData,setFeedbackData] = useState([]);
+  let name;
+  const loggendinUser = localStorage.getItem("user");
+  if(loggendinUser)
+  {
+    const foundUser = JSON.parse(loggendinUser);
+    name = foundUser.name;
+  }
   const serviceTicketUtil = async () => {
     // Gets the service tickets of the user
-    let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
+    let backendLink = process.env.REACT_APP_BACKEND,cnt = 0,accessToken;
+    const loggendinUser = localStorage.getItem("user");
+    if(loggendinUser)
+    {
+      const foundUser = JSON.parse(loggendinUser);
+      accessToken = foundUser.token;
+    }
     let link = ["/api/users/getServiceTickets","/api/users/getServiceProducer"];
     let requestOptions = {
       headers: {
@@ -59,7 +72,7 @@ export const ServicePage = () => {
   else {
     return (
       <div>
-        <Navbar />
+        <Navbar name = {name}/>
         <ServiceTicket serviceTicketData = {serviceTicketData} />
         <ServiceProducer serviceProducerData={serviceProducerData} />
         <form>

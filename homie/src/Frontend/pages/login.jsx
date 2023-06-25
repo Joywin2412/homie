@@ -1,9 +1,12 @@
 import React from 'react';
 import "./signup.module.css";
-
+import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
+  
     e.preventDefault();
     
     // Get form values
@@ -23,7 +26,7 @@ function Login() {
       };
 
       const { data } = await axios.post(
-        `${process.env.REACT_APP_BACKEND}/user/login`,
+        `${process.env.REACT_APP_BACKEND}/api/users/login`,
         { email, password },
         config
       );
@@ -31,37 +34,13 @@ function Login() {
       
       console.log("Login Successful");
       localStorage.setItem("user", JSON.stringify(data));
-  
+        navigate("/");
     } catch (error) {
       console.log(error);
+      navigate("/");
     }
     
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      accesstoken = foundUser.token;
-    fetch('https://api.example.com/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      Authorization: `Bearer ${accesstoken}`,
-      body: JSON.stringify({ email, password }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Login successful, redirect user or perform desired action
-          console.log('Login successful');
-        } else {
-          // Login failed, display error message or handle accordingly
-          console.log('Login failed');
-        }
-      })
-      .catch((error) => {
-        // Handle any network or server errors
-        console.error('Error occurred:', error);
-      });
-    }
+    
   };
 
   return (
@@ -84,7 +63,7 @@ function Login() {
               </div>
             </form>
             <div className="loginhere">
-              Don't have an account? <a className="a login-here link" href="signup.html" >Create an account here</a>
+              Don't have an account? <button onClick={()=>(navigate("/signup"))} className="a login-here link"   >Create an account here</button>
             </div>
           </div>
         </div>
