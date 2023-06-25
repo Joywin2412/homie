@@ -7,6 +7,9 @@ const generateToken = require("../config/generateToken.js");
 const serviceTicket = require("../models/serviceTicketSchema.js");
 const feedbackProvider = require("../models/feedbackSchema.js");
 const serviceProducer = require("../models/serviceProducerSchema.js");
+const rgbmanip =  require("../utils/rgbmanipulator.js");
+const furnituremanip = require("../utils/furniture.js");
+
 const registerUser = AsyncHandler(async (req, res) => {
   const { name, email, password, phone} = req.body;
   // console.log(lat, lon);
@@ -122,7 +125,12 @@ const getServiceTicketsByProducer = AsyncHandler(async(req,res)=>{
 const addServiceTickets = AsyncHandler(async(req,res)=>{
   const {email,problem,userName} = req.body;
   // console.log(email,problem,userName);
-  const producerResponse = "";
+  let producerResponse;
+  if(userName === "Angel")
+  producerResponse = rgbmanip();
+  else{
+    producerResponse = furnituremanip();
+  }
   try{
     await serviceTicket.create({Email : email , Problem : problem,Status : "Accepted",ServiceProducer: userName,
   Response:producerResponse});

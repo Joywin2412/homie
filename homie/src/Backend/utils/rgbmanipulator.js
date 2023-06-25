@@ -1,7 +1,7 @@
 // let userInput = prompt("Enter an RGB color value (e.g., 'rgb(255, 128, 0)'):");
 let userInput="rgb(255,128,9)";
 // Extracting RGB components from user input
-const rgbmanipulator=(userInput)=>{
+const rgbmanipulator=()=>{
 let rgbValues = userInput.match(/\d+/g);
 const colors=[];
 let red = parseInt(rgbValues[0]);
@@ -22,6 +22,6 @@ while((red-blue)>50)
     let manipulatedColor = `rgb(${red}, ${green}, ${blue})`;
     colors.push(manipulatedColor);
 }
-return colors;
+return colors[0];
 }
-module.exports(rgbmanipulator);
+module.exports = rgbmanipulator;
