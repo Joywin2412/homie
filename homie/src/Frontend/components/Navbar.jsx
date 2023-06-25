@@ -1,7 +1,7 @@
 import React from "react";
 import "../components/Navbar.module.css";
 import { useNavigate } from "react-router-dom";
-export const Navbar = () => {
+export const Navbar = ({name}) => {
     const navigate = useNavigate();
     return (
         <nav className="navBox">
@@ -16,6 +16,9 @@ export const Navbar = () => {
             <h3 onClick = {()=>navigate("/serviceTickets")}> Services</h3>
             <h3 onClick = {()=>navigate("/about")}>About</h3>
             <h3 onClick = {()=>navigate("/devs")}>The devs</h3>
+            
+            {name ? <h3 onClick = {()=>navigate("/profile")}>{name}</h3> : ""}
+
             </div>
             
             <div className="btnBox">

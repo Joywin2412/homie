@@ -8,6 +8,13 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
   const [loading,setLoading] = useState(0);
   const [feedbackData,setFeedbackData] = useState([]);
   const [feedback,setFeedback] = useState("");
+  let name;
+  const loggendinUser = localStorage.getItem("user");
+  if(loggendinUser)
+  {
+    const foundUser = JSON.parse(loggendinUser);
+    name = foundUser.name;
+  }
   const feedbackUtil = async () => {
     // Gets the feedback of all user
         let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;4
@@ -59,7 +66,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
   else {
     return (
       <div>
-        <Navbar />
+        <Navbar name = {name}/>
         <ServiceProducer serviceProducerData={serviceProducerData} />
         <Feedback feedbackData = {feedbackData} feedbackHander = {feedbackHandler} setFeedback={setFeedback}/>
       </div>

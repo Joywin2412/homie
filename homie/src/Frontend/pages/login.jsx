@@ -34,37 +34,13 @@ function Login() {
       
       console.log("Login Successful");
       localStorage.setItem("user", JSON.stringify(data));
-  
+        navigate("/");
     } catch (error) {
       console.log(error);
+      navigate("/");
     }
     
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      let accesstoken = foundUser.token;
-    fetch('https://api.example.com/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Login successful, redirect user or perform desired action
-          navigate("/")
-          console.log('Login successful');
-        } else {
-          // Login failed, display error message or handle accordingly
-          console.log('Login failed');
-        }
-      })
-      .catch((error) => {
-        // Handle any network or server errors
-        console.error('Error occurred:', error);
-      });
-    }
+    
   };
 
   return (

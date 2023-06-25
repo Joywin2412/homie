@@ -1,4 +1,4 @@
-import  React  from "react";
+import  React , {useState}  from "react";
 import { Navbar } from "../components/Navbar";
 import "../pages/Homepage.module.css";
 import img1 from "../../assets/sec3.jpg";
@@ -7,9 +7,16 @@ import { Footer } from '../components/Footer';
 import { ServiceProducer } from '../components/ServiceProducer';
 
 export const HomePage = () => {
-  return (
+  let name;
+  const loggendinUser = localStorage.getItem("user");
+  if(loggendinUser)
+  {
+    const foundUser = JSON.parse(loggendinUser);
+    name = foundUser.name;
+  }
+return (
     <div className="home">
-      <Navbar />
+      <Navbar name = {name} />
       <div className="section1">
         <h1>Your search for the best interior designers</h1>
         <h2>ends here</h2>
