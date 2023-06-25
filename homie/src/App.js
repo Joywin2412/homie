@@ -8,6 +8,7 @@ import Signup from './Frontend/pages/signup';
 import Login from './Frontend/pages/login';
 import {Routes,Route} from 'react-router-dom';
 import { ProfilePage } from './Frontend/pages/ProfilePage';
+import {ServiceTicketPage} from "./Frontend/pages/ServiceTicketPage";
 function App() {
   return (
     <div className="App">
@@ -18,6 +19,7 @@ function App() {
         <Route path = "/serviceTickets" element = {<ServicePage />} />
         <Route path = "/serviceProducer/:id" element = {<ServiceProducerPage />} />
         <Route path = "/profile" element = {<ProfilePage />} />
+        <Route path = "/serviceTicket/:id/:prod" element = {<ServiceTicketPage/>} />
       </Routes>
     </div>
   );

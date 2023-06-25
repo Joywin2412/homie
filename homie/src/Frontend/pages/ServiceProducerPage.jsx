@@ -28,7 +28,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
     setLoading(1);
     e.preventDefault();
     let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
-    let link = ["/api/users/addServiceTickets",`/api/users/getServiceTickets/${email}`];
+    let link = ["/api/users/addServiceTickets",`/api/users/getProdServiceTickets/${email}/${userName}`];
     let requestOptions = {
       headers: {
         "Content-Type": "application/json",
@@ -92,27 +92,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
         setLoading(0);
         }
     };
-    const feedbackHandler = async(e) =>{
-        // Creates a feedback in the database
-        setLoading(1);
-        e.preventDefault();
-        let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
-        let link = ["/api/users/addFeedback",`/api/users/getFeedback/${userName}`];
-        let requestOptions = {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-        },
-        };
-        try {
-        await axios.post(backendLink + link[cnt++],JSON.stringify({feedback,userName,name}),requestOptions);
-        const feedbackDataNow = await axios.get(backendLink + link[cnt++],requestOptions);
-        setFeedbackData(feedbackDataNow.data);
-        setLoading(0);
-        } catch(err) {
-        setLoading(0);
-        }
-    }
+    
   useEffect(()=>{
     feedbackUtil();
     serviceTicketUtil();
@@ -132,13 +112,15 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
 
       <div>
         <Navbar name = {name}/>
-        <ServiceTicket serviceTicketData = {serviceTicketData} />
+        <ServiceTicket serviceTicketData = {serviceTicketData} show = {false}/>
         <form>
           <label> What is your problem? </label>
           <input type = "text" onChange = {(e) =>setProblem(e.target.value)} />
           <input type = "submit" onClick = {serviceTicketHandler} />
         </form>
+
         <Feedback feedbackData = {feedbackData} feedbackHandler = {feedbackHandler} setFeedback={setFeedback}/>
+
 
       </div>
     );
