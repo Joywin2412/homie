@@ -6,6 +6,7 @@ import { Feedback } from "../components/Feedback";
 import { ServiceProducer } from "../components/ServiceProducer";
 import Loading from "../components/loading";
 import { useParams } from "react-router-dom";
+import "./servicepage.module.css";
 
 export const ServiceProducerPage = ({serviceProducerData}) => {
   let userName = useParams();
@@ -104,14 +105,6 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
       <div className="container-serviceproducer">
         <Navbar name={name} />
         <ServiceProducer serviceProducerData={serviceProducerData} />
-        <Feedback
-          feedbackData={feedbackData}
-          feedbackHandler={feedbackHandler}
-          setFeedback={setFeedback}
-        />
-
-      <div>
-        <Navbar name = {name}/>
         <ServiceTicket serviceTicketData = {serviceTicketData} show = {false}/>
         <form>
           <label> What is your problem? </label>
@@ -119,9 +112,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
           <input type = "submit" onClick = {serviceTicketHandler} />
         </form>
 
-        <Feedback feedbackData = {feedbackData} feedbackHandler = {feedbackHandler} setFeedback={setFeedback}/>
-
-
+        
       </div>
     );
     
