@@ -9,8 +9,7 @@ export const ServicePage = () => {
   const [loading, setLoading] = useState(1);
   const [serviceTicketData, setServiceTicketData] = useState([]);
   const [serviceProducerData,setServiceProducerData] = useState([]);
-  const [problem,setProblem] = useState("")
-  const [feedbackData,setFeedbackData] = useState([]);
+  
   let name;
   const loggendinUser = localStorage.getItem("user");
   if(loggendinUser)
@@ -44,27 +43,7 @@ export const ServicePage = () => {
       setLoading(0);
     }
   };
-  const serviceTicketHandler = async(e) =>{
-    // Creates a service ticket in the database
-    setLoading(1);
-    e.preventDefault();
-    let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
-    let link = ["/api/users/addServiceTickets","/api/users/getServiceTickets"];
-    let requestOptions = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    try {
-      await axios.post(backendLink + link[cnt++],JSON.stringify({problem}),requestOptions);
-      const serviceTicketDataNow = await axios.get(backendLink + link[cnt++],requestOptions);
-      setServiceTicketData(serviceTicketDataNow.data);
-      setLoading(0);
-    } catch(err) {
-      setLoading(0);
-    }
-  }
+  
   useEffect(()=>{
     serviceTicketUtil();
   },[]);
@@ -73,13 +52,10 @@ export const ServicePage = () => {
     return (
       <div>
         <Navbar name = {name}/>
+        <h1> Service Tickets: </h1>
         <ServiceTicket serviceTicketData = {serviceTicketData} />
+        <h1> Service Producers:</h1>
         <ServiceProducer serviceProducerData={serviceProducerData} />
-        <form>
-          <label> What is your problem? </label>
-          <input type = "text" onChange = {(e) =>setProblem(e.target.value)} />
-          <input type = "submit" onClick = {serviceTicketHandler} />
-        </form>
       </div>
     );
   }
