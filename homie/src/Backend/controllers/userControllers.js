@@ -123,9 +123,10 @@ const addServiceTickets = AsyncHandler(async(req,res)=>{
 });
 
 const getFeedback = AsyncHandler(async(req,res)=>{
+  const userName = req.params.id;
   const {email} = req.body;
   try{
-    const feedbackData = await feedbackProvider.find();
+    const feedbackData = await feedbackProvider.find({ServiceProducer : userName});
     res.status(200).json(feedbackData);
   }
   catch(err){

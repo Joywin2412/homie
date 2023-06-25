@@ -32,7 +32,7 @@ router.post("/login", authUser);
 router.get("/profile/:id", AuthenticateUser, profileUser);
 router.get("/getServiceTickets",AuthenticateUser,getServiceTickets);
 router.post("/addServiceTickets",AuthenticateUser,addServiceTickets);
-router.get("/getFeedback",AuthenticateUser,getFeedback);
+router.get("/getFeedback/:id",AuthenticateUser,getFeedback);
 router.post("/addFeedback",AuthenticateUser,addFeedback);
 router.get("/getServiceProducer",AuthenticateUser,getServiceProducer);
 

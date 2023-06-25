@@ -75,7 +75,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
           const foundUser = JSON.parse(loggendinUser);
           accessToken = foundUser.token;
         }
-        let link = ["/api/users/getFeedback"];
+        let link = [`/api/users/getFeedback/${userName}`];
         let requestOptions = {
         headers: {
             "Content-Type": "application/json",
@@ -95,7 +95,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
         console.log("evnet\n");
         e.preventDefault();
         let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
-        let link = ["/api/users/addFeedback","/api/users/getFeedback"];
+        let link = ["/api/users/addFeedback",`/api/users/getFeedback/${userName}`];
         let requestOptions = {
         headers: {
             "Content-Type": "application/json",
