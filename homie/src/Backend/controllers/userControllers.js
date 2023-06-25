@@ -122,8 +122,10 @@ const getServiceTicketsByProducer = AsyncHandler(async(req,res)=>{
 const addServiceTickets = AsyncHandler(async(req,res)=>{
   const {email,problem,userName} = req.body;
   // console.log(email,problem,userName);
+  const producerResponse = "";
   try{
-    await serviceTicket.create({Email : email , Problem : problem,Status : "Pending",ServiceProducer: userName});
+    await serviceTicket.create({Email : email , Problem : problem,Status : "Accepted",ServiceProducer: userName,
+  Response:producerResponse});
     res.status(200).json("Successfully created");
   }
   catch(err){
@@ -134,7 +136,7 @@ const addServiceTickets = AsyncHandler(async(req,res)=>{
 
 const getFeedback = AsyncHandler(async(req,res)=>{
   const userName = req.params.id;
-  const {email} = req.body;
+  // const {email} = req.body;
   try{
     const feedbackData = await feedbackProvider.find({ServiceProducer : userName});
     res.status(200).json(feedbackData);
@@ -165,7 +167,29 @@ const getServiceProducer = AsyncHandler(async(req,res)=>{
     throw new Error("No service producers available");
   }
 });
-
+const getIdServiceTickets = AsyncHandler(async(req,res)=>{
+  const email = req.params.id;
+  const _id = req.params.id2;
+  try{
+    const serviceTicketData = await serviceTicket.find({_id:_id});
+    res.status(200).json(serviceTicketData);
+  }
+  catch(err){
+    console.log(err);
+    throw new Error("No service tickets available");
+  }
+});
+const addLikes = AsyncHandler(async(req,res)=>{
+  const serviceId = req.body;
+  try{
+    const serviceTicketData = await feedbackProvider.find({});
+    res.status(200).json(serviceTicketData);
+  }
+  catch(err){
+    console.log(err);
+    throw new Error("No service tickets available");
+  }
+});
 module.exports = {
   registerUser,
   authUser,
@@ -176,7 +200,9 @@ module.exports = {
   getFeedback,
   addFeedback,
   serviceProviders,
-  getServiceProducer
+  getServiceProducer,
+  getIdServiceTickets,
+  addLikes
 };
 
 // Request must be in lower case while the schema is in upper case

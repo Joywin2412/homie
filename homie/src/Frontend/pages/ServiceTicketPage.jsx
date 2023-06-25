@@ -7,9 +7,11 @@ import { ServiceProducer } from "../components/ServiceProducer";
 import Loading from "../components/loading";
 import { useParams } from "react-router-dom";
 
-export const ServiceProducerPage = ({serviceProducerData}) => {
-  let userName = useParams();
-  userName = userName.id;
+export const ServiceTicketPage = ({serviceProducerData}) => {
+  let Id = useParams();
+  let serviceTicketId = Id.id;
+  let userName = Id.prod;
+
   const [loading,setLoading] = useState(1);
   const [feedbackData,setFeedbackData] = useState([]);
   const [feedback,setFeedback] = useState("");
@@ -23,27 +25,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
     name = foundUser.name;
     email = foundUser.email;
   }
-  const serviceTicketHandler = async(e) =>{
-    // Creates a service ticket in the database
-    setLoading(1);
-    e.preventDefault();
-    let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
-    let link = ["/api/users/addServiceTickets",`/api/users/getProdServiceTickets/${email}/${userName}`];
-    let requestOptions = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    try {
-      await axios.post(backendLink + link[cnt++],JSON.stringify({problem,userName,email}),requestOptions);
-      const serviceTicketDataNow = await axios.get(backendLink + link[cnt++],requestOptions);
-      setServiceTicketData(serviceTicketDataNow.data);
-      setLoading(0);
-    } catch(err) {
-      setLoading(0);
-    }
-  }
+  
   const serviceTicketUtil = async () => {
     // Gets the service tickets of the user
     let backendLink = process.env.REACT_APP_BACKEND,cnt = 0,accessToken;
@@ -53,7 +35,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
       const foundUser = JSON.parse(loggendinUser);
       accessToken = foundUser.token;
     }
-    let link = [`/api/users/getProdServiceTickets/${email}/${userName}`];
+    let link = [`/api/users/getIdServiceTickets/${email}/${serviceTicketId}`,`/api/users/getFeedback/${userName}`];
     let requestOptions = {
       headers: {
         "Content-Type": "application/json",
@@ -63,21 +45,19 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
     try {
       const serviceTicketDataNow = await axios.get(backendLink + link[cnt++],requestOptions);
       setServiceTicketData(serviceTicketDataNow.data);
+      const feedbackDataNow = await axios.get(backendLink + link[cnt++],requestOptions);
+      setFeedbackData(feedbackDataNow.data);
       setLoading(0);
     } catch(err) {
       setLoading(0);
     }
   };
-  const feedbackUtil = async () => {
-    // Gets the feedback of all user
-        let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;4
-        const loggendinUser = localStorage.getItem("user");
-        if(loggendinUser)
-        {
-          const foundUser = JSON.parse(loggendinUser);
-          accessToken = foundUser.token;
-        }
-        let link = [`/api/users/getFeedback/${userName}`];
+    const feedbackHandler = async(e) =>{
+        // Creates a feedback in the database
+        setLoading(1);
+        e.preventDefault();
+        let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
+        let link = ["/api/users/addFeedback",`/api/users/getFeedback/${userName}`];
         let requestOptions = {
         headers: {
             "Content-Type": "application/json",
@@ -85,16 +65,15 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
         },
         };
         try {
+        await axios.post(backendLink + link[cnt++],JSON.stringify({feedback,userName,name}),requestOptions);
         const feedbackDataNow = await axios.get(backendLink + link[cnt++],requestOptions);
         setFeedbackData(feedbackDataNow.data);
         setLoading(0);
         } catch(err) {
         setLoading(0);
         }
-    };
-    
+    }
   useEffect(()=>{
-    feedbackUtil();
     serviceTicketUtil();
   },[]);
   if (loading) return <Loading/>;
@@ -102,13 +81,9 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
     return (
       <div>
         <Navbar name = {name}/>
-        <ServiceTicket serviceTicketData = {serviceTicketData} show = {false}/>
-        <form>
-          <label> What is your problem? </label>
-          <input type = "text" onChange = {(e) =>setProblem(e.target.value)} />
-          <input type = "submit" onClick = {serviceTicketHandler} />
-        </form>
-        
+        <ServiceTicket serviceTicketData = {serviceTicketData} show = {true} />
+        <Feedback feedbackData = {feedbackData} feedbackHandler = {feedbackHandler} setFeedback={setFeedback}
+        serviceTicketId = {serviceTicketId}/>
       </div>
     );
   }

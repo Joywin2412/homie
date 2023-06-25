@@ -5,6 +5,7 @@ const serviceTicketModel = mongoose.Schema(
     Problem: { type: String, required: true },
     ServiceProducer : {type:String , required : true},
     Status: { type: String, required: true },
+    Response: {type:String},
   },
   { timestamps: true }
 );
