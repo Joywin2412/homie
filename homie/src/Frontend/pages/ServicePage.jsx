@@ -13,7 +13,13 @@ export const ServicePage = () => {
   const [feedbackData,setFeedbackData] = useState([]);
   const serviceTicketUtil = async () => {
     // Gets the service tickets of the user
-    let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
+    let backendLink = process.env.REACT_APP_BACKEND,cnt = 0,accessToken;
+    const loggendinUser = localStorage.getItem("user");
+    if(loggendinUser)
+    {
+      const foundUser = JSON.parse(loggendinUser);
+      accessToken = foundUser.token;
+    }
     let link = ["/api/users/getServiceTickets","/api/users/getServiceProducer"];
     let requestOptions = {
       headers: {
