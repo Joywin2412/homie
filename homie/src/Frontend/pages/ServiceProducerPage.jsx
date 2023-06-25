@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 export const ServiceProducerPage = ({serviceProducerData}) => {
   let userName = useParams();
   userName = userName.id;
-  const [loading,setLoading] = useState(0);
+  const [loading,setLoading] = useState(1);
   const [feedbackData,setFeedbackData] = useState([]);
   const [feedback,setFeedback] = useState("");
   const [problem,setProblem] = useState("");
@@ -28,7 +28,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
     setLoading(1);
     e.preventDefault();
     let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
-    let link = ["/api/users/addServiceTickets","/api/users/getServiceTickets"];
+    let link = ["/api/users/addServiceTickets",`/api/users/getServiceTickets/${email}`];
     let requestOptions = {
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
       const foundUser = JSON.parse(loggendinUser);
       accessToken = foundUser.token;
     }
-    let link = ["/api/users/getServiceTickets"];
+    let link = [`/api/users/getProdServiceTickets/${email}/${userName}`];
     let requestOptions = {
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
           const foundUser = JSON.parse(loggendinUser);
           accessToken = foundUser.token;
         }
-        let link = ["/api/users/getFeedback"];
+        let link = [`/api/users/getFeedback/${userName}`];
         let requestOptions = {
         headers: {
             "Content-Type": "application/json",
@@ -94,10 +94,10 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
     };
     const feedbackHandler = async(e) =>{
         // Creates a feedback in the database
-        console.log("evnet\n");
+        setLoading(1);
         e.preventDefault();
         let backendLink = process.env.REACT_APP_BACKEND,accessToken = "123",cnt = 0;
-        let link = ["/api/users/addFeedback","/api/users/getFeedback"];
+        let link = ["/api/users/addFeedback",`/api/users/getFeedback/${userName}`];
         let requestOptions = {
         headers: {
             "Content-Type": "application/json",

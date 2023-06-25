@@ -29,9 +29,6 @@ const registerUser = AsyncHandler(async (req, res) => {
     Email: req.body.email,
     Password: req.body.password,
     Phone: req.body.phone,
-    Lat: lat,
-    Lon: lon,
-    Address: address,
   });
   if (new_user) {
     res.status(201).json({
@@ -99,9 +96,22 @@ const serviceProviders= AsyncHandler(async(req,res)=>{
 });
 
 const getServiceTickets = AsyncHandler(async(req,res)=>{
-  const {email} = req.body;
+  const email = req.params.id;
+  
   try{
-    const serviceTicketData = await serviceTicket.find();
+    const serviceTicketData = await serviceTicket.find({Email : email});
+    res.status(200).json(serviceTicketData);
+  }
+  catch(err){
+    console.log(err);
+    throw new Error("No service tickets available");
+  }
+});
+const getServiceTicketsByProducer = AsyncHandler(async(req,res)=>{
+  const email = req.params.id;
+  const prod = req.params.prod;
+  try{
+    const serviceTicketData = await serviceTicket.find({Email : email,ServiceProducer:prod});
     res.status(200).json(serviceTicketData);
   }
   catch(err){
@@ -123,9 +133,10 @@ const addServiceTickets = AsyncHandler(async(req,res)=>{
 });
 
 const getFeedback = AsyncHandler(async(req,res)=>{
+  const userName = req.params.id;
   const {email} = req.body;
   try{
-    const feedbackData = await feedbackProvider.find();
+    const feedbackData = await feedbackProvider.find({ServiceProducer : userName});
     res.status(200).json(feedbackData);
   }
   catch(err){
@@ -160,6 +171,7 @@ module.exports = {
   authUser,
   profileUser,
   getServiceTickets,
+  getServiceTicketsByProducer,
   addServiceTickets,
   getFeedback,
   addFeedback,
