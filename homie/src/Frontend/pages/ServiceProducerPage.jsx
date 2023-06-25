@@ -4,7 +4,9 @@ import { ServiceTicket } from "../components/ServiceTicket";
 import axios from "axios";
 import { Feedback } from "../components/Feedback";
 import { ServiceProducer } from "../components/ServiceProducer";
+import Loading from "../components/loading";
 import { useParams } from "react-router-dom";
+
 export const ServiceProducerPage = ({serviceProducerData}) => {
   let userName = useParams();
   userName = userName.id;
@@ -115,7 +117,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
     feedbackUtil();
     serviceTicketUtil();
   },[]);
-  if (loading) return <h1> Loading </h1>;
+  if (loading) return <Loading/>;
   else {
     return (
       <div>

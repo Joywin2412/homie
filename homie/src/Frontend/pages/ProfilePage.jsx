@@ -3,6 +3,7 @@ import { Navbar } from "../components/Navbar";
 import { ServiceTicket } from "../components/ServiceTicket";
 import axios from "axios";
 import {Profile} from "../components/Profile";
+import Loading from "../components/loading";
 export const ProfilePage = () => {
   const [loading, setLoading] = useState(1);
   const [serviceTicketData, setServiceTicketData] = useState([]);
@@ -46,7 +47,7 @@ export const ProfilePage = () => {
   useEffect(()=>{
     profileUtil();
   },[]);
-  if (loading) return <h1> Loading </h1>;
+  if (loading) return <Loading/>;
   else {
     return (
       <div>
