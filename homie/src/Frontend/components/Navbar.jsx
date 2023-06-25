@@ -9,7 +9,7 @@ export const Navbar = ({name}) => {
             <h2 style={{
                 fontSize:'2.25rem',
                 margin:'auto'
-            }}>homie</h2>
+            }}onClick= {()=>navigate("/")}>homie</h2>
             </div>
             <div className="navlinks">
             <h3 onClick = {()=>navigate("/")}>Home</h3>

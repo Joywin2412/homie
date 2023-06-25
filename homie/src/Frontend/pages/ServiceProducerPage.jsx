@@ -4,6 +4,7 @@ import { ServiceTicket } from "../components/ServiceTicket";
 import axios from "axios";
 import { Feedback } from "../components/Feedback";
 import { ServiceProducer } from "../components/ServiceProducer";
+import Loading from "../components/loading";
 export const ServiceProducerPage = ({serviceProducerData}) => {
   const [loading,setLoading] = useState(0);
   const [feedbackData,setFeedbackData] = useState([]);
@@ -62,7 +63,7 @@ export const ServiceProducerPage = ({serviceProducerData}) => {
   useEffect(()=>{
     feedbackUtil();
   },[]);
-  if (loading) return <h1> Loading </h1>;
+  if (loading) return <Loading/>;
   else {
     return (
       <div>

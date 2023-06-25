@@ -5,6 +5,7 @@ import axios from "axios";
 import { Feedback } from "../components/Feedback";
 import { ServiceProducer } from "../components/ServiceProducer";
 import { ServiceProducerPage } from "./ServiceProducerPage";
+import Loading from "../components/loading";
 export const ServicePage = () => {
   const [loading, setLoading] = useState(1);
   const [serviceTicketData, setServiceTicketData] = useState([]);
@@ -68,7 +69,7 @@ export const ServicePage = () => {
   useEffect(()=>{
     serviceTicketUtil();
   },[]);
-  if (loading) return <h1> Loading </h1>;
+  if (loading) return <Loading n={name}/>;
   else {
     return (
       <div>
