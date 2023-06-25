@@ -17,7 +17,7 @@ export const Feedback = ({feedbackData,setFeedback,feedbackHandler}) => {
         <form>
             <label> Add your precious feedback </label>
             <input type = "text" onChange = {(e) =>setFeedback(e.target.value)} />
-            <input type = "submit" onClick = {feedbackHandler} />
+            <input type = "submit" onClick = {(e)=>{feedbackHandler(e)}} />
         </form>
     </div>);
 };

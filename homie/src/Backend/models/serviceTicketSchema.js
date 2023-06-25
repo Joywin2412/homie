@@ -3,6 +3,7 @@ const serviceTicketModel = mongoose.Schema(
   {
     Email: { type: String },
     Problem: { type: String, required: true },
+    ServiceProducer : {type:String , required : true},
     Status: { type: String, required: true },
   },
   { timestamps: true }

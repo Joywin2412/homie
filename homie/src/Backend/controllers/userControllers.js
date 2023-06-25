@@ -110,9 +110,10 @@ const getServiceTickets = AsyncHandler(async(req,res)=>{
   }
 });
 const addServiceTickets = AsyncHandler(async(req,res)=>{
-  const {email,problem} = req.body;
+  const {email,problem,userName} = req.body;
+  // console.log(email,problem,userName);
   try{
-    await serviceTicket.create({Email : email , Problem : problem,Status : "Pending"});
+    await serviceTicket.create({Email : email , Problem : problem,Status : "Pending",ServiceProducer: userName});
     res.status(200).json("Successfully created");
   }
   catch(err){
@@ -133,9 +134,9 @@ const getFeedback = AsyncHandler(async(req,res)=>{
   }
 });
 const addFeedback = AsyncHandler(async(req,res)=>{
-  const {name,feedback} = req.body;
+  const {name,feedback,userName} = req.body;
   try{
-    await feedbackProvider.create({Name : name ,Likes : 0 , Comment : feedback,reportFlag : 0 });
+    await feedbackProvider.create({Name : name ,Likes : 0 , Comment : feedback,reportFlag : 0 ,ServiceProducer:userName});
     res.status(200).json("Successfully created");
   }
   catch(err){
