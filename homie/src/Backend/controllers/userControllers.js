@@ -29,9 +29,6 @@ const registerUser = AsyncHandler(async (req, res) => {
     Email: req.body.email,
     Password: req.body.password,
     Phone: req.body.phone,
-    Lat: lat,
-    Lon: lon,
-    Address: address,
   });
   if (new_user) {
     res.status(201).json({
